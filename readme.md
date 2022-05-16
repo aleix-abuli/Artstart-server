@@ -35,7 +35,7 @@
 ## **Do I need to create and delete genres????**
 
 
-## Models
+## **Models**
 ### User model
 ````javascript
 {
@@ -59,5 +59,22 @@
     likes: [{type: Schema.Types.ObjectId, ref: 'User'}],
     comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}],
     genres: [{type: Schema.Types.ObjectId, ref: 'Genre'}]
+}
+````
+### Comment model
+````javascript
+{
+    message: {type: String, required: false},
+    owner: {type: Schema.Types.ObjectId, ref: 'User'},
+    likes: [{type: Schema.Types.ObjectId, ref: 'User'}]
+}
+````
+### Collection model
+````javascript
+{
+    title: {type: String, required: true},
+    description: {type: String, required: false},
+    owner: {type: Schema.Types.ObjectId, ref: 'User'},
+    items: [{type: Schema.Types.ObjectId, ref: 'Post'}]
 }
 ````
