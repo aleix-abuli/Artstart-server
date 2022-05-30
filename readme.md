@@ -12,12 +12,6 @@
 |GET|/api/posts/:id|(empty)|Returns one post|
 |PUT|/api/posts/:id|json|Updates one post|
 |DELETE|/api/posts/:id|(empty)|Deletes one post|
-|**Comment Routes**||||
-|GET|/api/comments|(empty)|Returns all comments|
-|POST|/api/comments|json|Creates a new comment|
-|GET|/api/comments/:id|(empty)|Returns one comment|
-|PUT|/api/comments/:id|json|Updates one comment|
-|DELETE|/api/comments/:id|(empty)|Deletes one comment|
 |**Collection Routes**||||
 |GET|/api/collections|(empty)|Returns all collections|
 |POST|/api/collections|json|Creates a new collection|
@@ -30,6 +24,12 @@
 |GET|/api/genres/:id|(empty)|Returns one genre|
 |PUT|/api/genres/:id|json|Updates one genre|
 |DELETE|/api/genres/:id|(empty)|Deletes one genre|
+|**Comment Routes**||||
+|GET|/api/comments|(empty)|Returns all comments|
+|POST|/api/comments|json|Creates a new comment|
+|GET|/api/comments/:id|(empty)|Returns one comment|
+|PUT|/api/comments/:id|json|Updates one comment|
+|DELETE|/api/comments/:id|(empty)|Deletes one comment|
 
 
 ## **Do I need to create and delete genres????**
@@ -61,20 +61,29 @@
     genres: [{type: Schema.Types.ObjectId, ref: 'Genre'}]
 }
 ````
-### Comment model
-````javascript
-{
-    message: {type: String, required: false},
-    owner: {type: Schema.Types.ObjectId, ref: 'User'},
-    likes: [{type: Schema.Types.ObjectId, ref: 'User'}]
-}
-````
 ### Collection model
 ````javascript
 {
     title: {type: String, required: true},
     description: {type: String, required: false},
     owner: {type: Schema.Types.ObjectId, ref: 'User'},
-    items: [{type: Schema.Types.ObjectId, ref: 'Post'}]
+    items: [{type: Schema.Types.ObjectId, ref: 'Post'}],
+    coverUrl: {type: String}
+}
+````
+### Genre model
+````javascript
+{
+    genre: {type: String, required: true},
+    items: [{type: Schema.Types.ObjectId, ref: 'Post'}],
+    coverUrl: {type: String}
+}
+````
+### Comment model
+````javascript
+{
+    message: {type: String, required: false},
+    owner: {type: Schema.Types.ObjectId, ref: 'User'},
+    likes: [{type: Schema.Types.ObjectId, ref: 'User'}]
 }
 ````
