@@ -39,9 +39,10 @@
 ### User model
 ````javascript
 {
-    username: {type: String, required: true},
+    username: {type: String, required: true, unique: true},
     email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
+    name: {type: String, default: 'Anonymous'},
     posts: [{type: Schema.Types.ObjectId, ref: 'Post'}],
     likes: [{type: Schema.Types.ObjectId, ref: 'Post'}],
     collections: [{type: Schema.Types.ObjectId, ref: 'Collection'}], 
