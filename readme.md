@@ -32,7 +32,7 @@
 |DELETE|/api/comments/:id|(empty)|Deletes one comment|
 
 
-## **Do I need to create and delete genres????**
+## **Do I need to create and delete genres????** (maybe for updates)
 
 
 ## **Models**
@@ -67,8 +67,9 @@
     title: {type: String, required: true},
     description: {type: String, required: false},
     owner: {type: Schema.Types.ObjectId, ref: 'User'},
+    coverUrl: {type: String},
     items: [{type: Schema.Types.ObjectId, ref: 'Post'}],
-    coverUrl: {type: String}
+    comments: [{type: Schema.Types.ObjectId, ref: 'Comment'}]
 }
 ````
 ### Genre model
@@ -87,3 +88,31 @@
     likes: [{type: Schema.Types.ObjectId, ref: 'User'}]
 }
 ````
+<br>
+
+# **FRONT**
+## **Components**
+- Navbar
+- Footer
+
+<br>
+
+- FeedPost
+- PostInfo
+- TagCarousel
+- Tag
+
+<br>
+
+- PostDetails
+- CommentsList
+
+<br>
+
+- ProfileCard
+- PostGrid
+- PostPic
+- CollGrid
+- ProfileColl
+
+<br>
