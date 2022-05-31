@@ -3,5 +3,5 @@ const app = require('./app');
 const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
-    console.log(`Server listening on port http://localhost:${PORT}`);
+    console.log(`Artstart Server listening on port http://localhost:${PORT}! Yay!!!`);
 });
