@@ -2,12 +2,15 @@ const router = require("express").Router();
 const { isAuthenticated } = require('../middleware/jwt.middleware');
 const User = require('../models/User.model');
 
+
 router
 .route('/')
 .get((req, res) => {
+
     User.find()
     .then((users) => res.json(users))
     .catch((err) => res.json(err));
+
 });
 
 
@@ -28,10 +31,10 @@ router
     const { id } = req.params;
 
     User
-    .findByIdAndUpdate(id, req.body, { new: true })
+    .findByIdAndUpdate(id, req.body, { new: true }) // should I use the full req.body?? Think about this later
     .then(user => res.json(user))
     .catch(err => res.status(500).json(err));
-    
+
 });
 
 module.exports = router;
