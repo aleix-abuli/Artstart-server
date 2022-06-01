@@ -6,7 +6,7 @@ const collectionRoutes = require('./collections.routes');
 const genreRoutes = require('./genres.routes');
 const commentRoutes = require('./comments.routes');
 
-router.get('/', (req, res) => res.json('Welcome to Artstart Server.'));
+router.get('/', (req, res) => {res.json('Welcome to Artstart Server.')});
 
 router.use('/users', userRoutes);
 router.use('/posts', postRoutes);
