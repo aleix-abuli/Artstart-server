@@ -2,7 +2,6 @@
 |-----------|-----|--------------|--------|
 |**User Routes**||||
 |GET|/api/users|(empty)|Returns all users|
-|POST|/api/users|json|Creates a new user|
 |GET|/api/users/:id|(empty)|Returns one user|
 |PUT|/api/users/:id|json|Updates one user|
 |DELETE|/api/users/:id|(empty)|Deletes one user|
