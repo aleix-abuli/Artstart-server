@@ -1,5 +1,7 @@
 const router = require("express").Router();
+const mongoose = require('mongoose');
 const { isAuthenticated } = require('../middleware/jwt.middleware');
+
 const User = require('../models/User.model');
 
 
@@ -9,7 +11,7 @@ router
 
     User.find()
     .then((users) => res.json(users))
-    .catch((err) => res.json(err));
+    .catch((err) => res.status(500).json(err));
 
 });
 

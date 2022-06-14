@@ -13,5 +13,6 @@ router.use('/posts', postRoutes);
 router.use('/collections', collectionRoutes);
 router.use('/genres', genreRoutes);
 router.use('/comments', commentRoutes);
+router.use('/auth', authRoutes);
 
 module.exports = router;
