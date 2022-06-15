@@ -85,10 +85,10 @@ const users = [
     {
         _id: '62a8dd5d01ea43b114d4dd27',
         username: 'silllda',
-        email: 'hajime@sorayama.jp',
+        email: 'silll@da.com',
         password: '1234',
         name: 'SilllDA',
-        posts: ['62a9967fdd4f53dd1a25635a', '62a996918b54ec3bce420f7c '],
+        posts: ['62a9967fdd4f53dd1a25635a', '62a996918b54ec3bce420f7c'],
         likes: [],
         collections: [],
         followedBy: [],
