@@ -124,7 +124,7 @@ const users = [
     {
         _id: '62a98c70e50f9d003ad96aa5',
         username: 'buonarroti',
-        email: 'michel@angelo.fr',
+        email: 'michel@angelo.it',
         password: '1234',
         name: 'Michelangelo',
         posts: ['62a99b528a4e54ed88bc0d72', '62a99b63134c9e12439bab3e'],

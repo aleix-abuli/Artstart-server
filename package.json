@@ -6,7 +6,8 @@
       "start": "node server.js",
       "dev": "nodemon server.js",
       "seedUsers": "node ./bin/users.seed.js",
-      "seedPosts": "node ./bin/posts.seed.js"
+      "seedPosts": "node ./bin/posts.seed.js",
+      "seedGenres": "node ./bin/genres.seed.js"
     },
     "dependencies": {
       "bcrypt": "^5.0.1",

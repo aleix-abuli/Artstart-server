@@ -11,7 +11,8 @@ router
 
     Post
     .find()
-    .then((posts) => res.json(posts))
+    .populate('owner')
+    .then((posts) => res.status(201).json(posts))
     .catch((err) => res.status(500).json(err));
 
 })
