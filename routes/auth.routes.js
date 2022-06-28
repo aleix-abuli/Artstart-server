@@ -77,11 +77,11 @@ router.post('/login', (req, res, next) => {
 });
 
 
-router.get('/verify', isAuthenticated, (req, res, next) => {
+router.get('/verify', /* isAuthenticated, */ (req, res, next) => {
 
     setTimeout(() => {
         res.status(200).json(req.payload);
-    }, 3000)
+    }, 1000)
 
 });
 
