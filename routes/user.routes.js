@@ -24,8 +24,18 @@ router
 
     User
     .findById(id)
+    .populate('posts')
+    .populate({
+        path: 'likes',
+        populate: {
+            path: 'owner'
+        }
+    })
+    .populate('collections')
     .then(user => res.json(user))
-    .catch(err => res.status(500).json(err));
+    .catch(err => {
+        console.log(err)
+        res.status(500).json(err)});
 
 })
 .put((req, res) => {
