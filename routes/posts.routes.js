@@ -58,7 +58,10 @@ router
 
     User
     .findByIdAndUpdate(userId, { $push: { likes: id } })
-    .then((updatedUser) => res.status(201).json(updatedUser))
+    .then((__) => {
+        Post.findByIdAndUpdate(id, { $push: { likes: userId} })
+        .then((__) => res.status(201));
+    })
     .catch((err) => res.status(500).json(err));
 
 });
