@@ -35,6 +35,7 @@ router
 
     Post
     .findById(id)
+    .populate('genres')
     .then(post => res.json(post))
     .catch(err => res.status(500).json(err));
 })

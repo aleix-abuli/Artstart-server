@@ -17,13 +17,22 @@ router
     .then((newColl) => {
 
         if(postToSave) {
+
             Collection
-            .findByIdAndUpdate(newColl._id, { $push: { items: postToSave } })
+            .findByIdAndUpdate(newColl._id, { $push: { items: postToSave } }, { new: true })
+            .then((coll) => {
+                User
+                .findByIdAndUpdate(owner, { $push: { collections: coll._id } })
+                .then((__) => res.status(201).json(coll));
+            })
+
+        } else {
+
+            User
+            .findByIdAndUpdate(owner, { $push: { collections: newColl._id } })
+            .then((__) => res.status(201).json(newColl));
+
         };
-        
-        User
-        .findByIdAndUpdate(owner, { $push: { collections: newColl._id } })
-        .then((__) => res.status(201).json(newColl));
 
     })
     .catch((err) => {
