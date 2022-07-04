@@ -12,7 +12,7 @@ const User = model('User', new Schema(
         collections: [{type: ObjectId, ref: 'Collection'}], 
         followedBy: [{type: ObjectId, ref: 'User'}],
         following: [{type: ObjectId, ref: 'User'}],
-        imageUrl: {type: String, default: 'https://icon-library.com/images/default-profile-icon/default-profile-icon-10.j'}
+        imageUrl: {type: String, default: 'https://us.123rf.com/450wm/diddleman/diddleman1505/diddleman150500024/39789195-no-user-profile-picture-hand-drawn-illustration.jpg?ver=6'}
     }
 ));
 
