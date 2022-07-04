@@ -43,4 +43,19 @@ router
 });
 
 
+router
+.route('/:id')
+.put(isAuthenticated, (req, res) => {
+
+    const { id } = req.params;
+    const { postId } = req.body;
+
+    Collection
+    .findByIdAndUpdate(id, { $push: { items: postId } }, { new: true })
+    .then((collection) => res.status(201).json(collection))
+    .catch((err) => res.status(500).json(err));
+
+});
+
+
 module.exports = router;
