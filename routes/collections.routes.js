@@ -52,6 +52,12 @@ router
     Collection
     .findById(id)
     .populate('items')
+    .populate({
+        path: 'comments',
+        populate: {
+            path: 'owner'
+        }
+    })
     .then((collection) => res.status(201).json(collection))
     .catch((err) => res.status(500).json(err));
 
