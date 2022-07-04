@@ -45,6 +45,17 @@ router
 
 router
 .route('/:id')
+.get(isAuthenticated, (req,res) => {
+
+    const { id } = req.params;
+
+    Collection
+    .findById(id)
+    .populate('items')
+    .then((collection) => res.status(201).json(collection))
+    .catch((err) => res.status(500).json(err));
+
+})
 .put(isAuthenticated, (req, res) => {
 
     const { id } = req.params;

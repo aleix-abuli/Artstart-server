@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const { Collection } = require("mongoose");
 const { isAuthenticated } = require('../middleware/jwt.middleware');
 
 const Comment = require('../models/Comment.model');
@@ -26,6 +27,31 @@ router
     })
     .catch((err) => res.status(500).json(err));
 
-})
+});
+
+
+router
+.route('/collections')
+.post(isAuthenticated, (req, res) => {
+
+    const { message, owner, post } = req.body;
+
+    Comment
+    .create({ message, owner })
+    .then((newComment) => {
+
+        Collection.findByIdAndUpdate(post, { $push: { comments: newComment._id } }, { new: true })
+        .populate({
+            path: 'comments',
+            populate: {
+                path: 'owner'
+            }
+        })
+        .then((updatedPost) => res.status(201).json(updatedPost.comments));
+
+    })
+    .catch((err) => res.status(500).json(err));
+
+});
 
 module.exports = router;
