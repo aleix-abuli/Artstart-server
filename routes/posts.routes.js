@@ -19,8 +19,10 @@ router
 })
 .post((req, res) => {
 
+    const { description, owner, imageArray } = req.body;
+
     Post
-    .create({ description, imageArray, likes, genres }) //still missing owner and don't know about the image array
+    .create({ description, owner, imageArray})
     .then(newPost => res.json(newPost))
     .catch(err => res.status(500).json(err));
 
