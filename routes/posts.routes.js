@@ -4,6 +4,7 @@ const { isAuthenticated } = require('../middleware/jwt.middleware');
 
 const Post = require('../models/Post.model');
 const User = require('../models/User.model');
+const Genre = require('../models/Genre.model');
 
 
 router
@@ -19,13 +20,18 @@ router
 })
 .post((req, res) => {
 
-    const { description, owner, imageArray } = req.body;
+    const { description, owner, imageArray, genres } = req.body;
+
+    console.log('Genres: ', genres);
 
     Post
-    .create({ description, owner, imageArray})
-    .then(newPost => res.json(newPost))
+    .create({ description, owner, imageArray, genres})
+    .then((newPost) => {
+        User
+        .findByIdAndUpdate(owner, { $push: { posts: newPost._id } }, { new: true })
+        .then((updatedUser) => res.status(201).json(updatedUser));
+    })
     .catch(err => res.status(500).json(err));
-
 });
 
 
