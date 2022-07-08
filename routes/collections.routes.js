@@ -62,6 +62,16 @@ router
     .catch((err) => res.status(500).json(err));
 
 })
+.post(isAuthenticated, (req, res) => {
+
+    const { id } = req.params;
+
+    Collection
+    .findByIdAndUpdate(id, req.body, { new: true})
+    .then((updatedColl) => res.status(201).json(updatedColl))
+    .catch((err) => res.status(500).json(err));
+
+})
 .put(isAuthenticated, (req, res) => {
 
     const { id } = req.params;
