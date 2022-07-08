@@ -27,6 +27,14 @@ router
     Post
     .create({ description, owner, imageArray, genres})
     .then((newPost) => {
+        genres.map((genre) => {
+            Genre.findByIdAndUpdate(genre, { $push: { items: newPost._id } }, {new:true})
+            .then((updatedGenre) => updatedGenre);
+        });
+
+        return newPost;
+    })
+    .then((newPost) => {
         User
         .findByIdAndUpdate(owner, { $push: { posts: newPost._id } }, { new: true })
         .then((updatedUser) => res.status(201).json(updatedUser));
@@ -58,8 +66,25 @@ router
     const { id } = req.params;
 
     Post
-    .findByIdAndUpdate(id, req.body, { new: true }) // should I use the full req.body?? Think about this later
-    .then(post => res.json(post))
+    .findByIdAndUpdate(id, req.body, { new: true })
+    .then((post) => {
+
+        const id = post._id;
+
+        Genre
+        .updateMany({ items: id }, { $pull: { items: id} })
+        .then((genres) => {
+            post.genres.map((genre) => {
+                Genre
+                .findByIdAndUpdate(genre, { $push: { items: id }})
+                .then((updatedGenre) => updatedGenre);
+            });
+        });
+
+        return post;
+
+    })
+    .then((post) => res.status(201).json(post))
     .catch(err => res.status(500).json(err));
 });
 
