@@ -5,6 +5,21 @@ const Comment = require('../models/Comment.model');
 const Post = require("../models/Post.model");
 const Collection = require('../models/Collection.model');
 
+
+router
+.route('/:id')
+.put(isAuthenticated, (req, res) => {
+
+    const id = req.body._id; 
+
+    Comment
+    .findByIdAndUpdate(id, req.body, {new: true})
+    .then((updatedComment) => res.status(201).json(updatedComment))
+    .catch((err) => res.status(500).json(err));
+
+});
+
+
 router
 .route('/posts')
 .post(isAuthenticated, (req, res) => {
