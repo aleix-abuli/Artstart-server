@@ -43,10 +43,46 @@ router
     const { id } = req.params;
 
     User
-    .findByIdAndUpdate(id, req.body, { new: true }) // should I use the full req.body?? Think about this later
-    .then(user => res.json(user))
+    .findByIdAndUpdate(id, req.body, { new: true })
+    .then(user => res.status(201).json(user))
     .catch(err => res.status(500).json(err));
 
+});
+
+
+router
+.route('/follow/:id')
+.post(isAuthenticated, (req, res) => {
+
+    const { id } = req.params;
+    const user = req.body._id;
+
+    User
+    .findByIdAndUpdate(id, { $push: { followedBy: user } }, {new: true})
+    .then((updatedUser) => {
+        User
+        .findByIdAndUpdate(user, { $push: { following: updatedUser._id } }, {new: true})
+        .then((updatedUser2) => res.status(201).json(updatedUser2));
+    })
+    .catch((err) => res.status(500).json(err));
+});
+
+
+router
+.route('/unfollow/:id')
+.post(isAuthenticated, (req, res) => {
+
+    const { id } = req.params;
+    const user = req.body._id;
+
+    User
+    .findByIdAndUpdate(id, { $pull: { followedBy: user } }, {new: true})
+    .then((updatedUser) => {
+        User
+        .findByIdAndUpdate(user, { $pull: { following: updatedUser._id } }, {new: true})
+        .then((updatedUser2) => res.status(201).json(updatedUser2));
+    })
+    .catch((err) => res.status(500).json(err));
 });
 
 module.exports = router;
