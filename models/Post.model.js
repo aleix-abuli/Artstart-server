@@ -9,6 +9,9 @@ const Post = model('Post', new Schema(
         likes: [{type: ObjectId, ref: 'User'}],
         comments: [{type: ObjectId, ref: 'Comment'}],
         genres: [{type: ObjectId, ref: 'Genre'}]
+    },
+    {
+        timpestamps: true
     }
 ));
 

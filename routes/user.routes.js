@@ -85,4 +85,37 @@ router
     .catch((err) => res.status(500).json(err));
 });
 
+
+router
+.route('/following/:id')
+.get(isAuthenticated, (req, res) => {
+
+    const { id } = req.params;
+
+    User
+    .findById(id)
+    .populate({
+        path: 'following',
+        populate: {
+            path: 'posts',
+            populate: {
+                path: 'owner'
+            }
+        }
+    })
+    .then((user) => {
+        
+        const postArray = [];
+
+        user.following.forEach((followee) => {
+            followee.posts.forEach((post) => postArray.push(post));
+        });
+
+        return res.status(201).json(postArray);
+
+    })
+    .catch((err) => res.status(500).json(err));
+
+});
+
 module.exports = router;
