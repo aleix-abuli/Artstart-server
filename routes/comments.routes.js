@@ -17,6 +17,18 @@ router
     .then((updatedComment) => res.status(201).json(updatedComment))
     .catch((err) => res.status(500).json(err));
 
+})
+.delete(isAuthenticated, (req, res) => {
+
+    const { id } = req.params;
+
+    Comment
+    .findByIdAndDelete(id)
+    .then((deletedComment) => {
+        res.status(201).json(deletedComment);
+    })
+    .catch((err) => console.log(err));
+
 });
 
 

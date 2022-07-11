@@ -100,7 +100,25 @@ router
     .findByIdAndUpdate(userId, { $push: { likes: id } })
     .then((__) => {
         Post.findByIdAndUpdate(id, { $push: { likes: userId} })
-        .then((__) => res.status(201));
+        .then((post) => res.status(201).json(post));
+    })
+    .catch((err) => res.status(500).json(err));
+
+});
+
+
+router
+.route('/unlike/:id')
+.post(isAuthenticated, (req, res) => {
+
+    const { id } = req.params;
+    const userId = req.body._id;
+
+    User
+    .findByIdAndUpdate(userId, { $pull: { likes: id } })
+    .then((__) => {
+        Post.findByIdAndUpdate(id, { $pull: { likes: userId} })
+        .then((post) => res.status(201).json(post));
     })
     .catch((err) => res.status(500).json(err));
 
