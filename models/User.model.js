@@ -7,6 +7,8 @@ const User = model('User', new Schema(
         email: {type: String, required: true, unique: true},
         password: {type: String, required: true},
         name: {type: String, default: 'Anonymous'},
+        description: {type: String},
+        location: {type: String},
         posts: [{type: ObjectId, ref: 'Post'}],
         likes: [{type: ObjectId, ref: 'Post'}],
         collections: [{type: ObjectId, ref: 'Collection'}], 
