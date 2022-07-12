@@ -32,6 +32,7 @@ router
         }
     })
     .populate('collections')
+    .populate('following')
     .then(user => res.json(user))
     .catch(err => {
         console.log(err)
