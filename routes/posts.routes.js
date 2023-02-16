@@ -14,6 +14,7 @@ router
     Post
     .find()
     .populate('owner')
+    .populate('genres')
     .then((posts) => res.status(201).json(posts))
     .catch((err) => res.status(500).json(err));
 
